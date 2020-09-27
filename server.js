@@ -9,6 +9,10 @@ const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
 
+require('dotenv').config()
+const PORT =  process.env.PORT || 3000;
+
+
 const postgres=knex({
   client: 'pg',
   connection: {
@@ -55,6 +59,7 @@ app.put('/image',(req,res)=>(image.handleImage(req,res,postgres,bcrypt)))
 
 app.post('/imageurl',(req,res)=>{image.handleApiCall(req,res)})
 
-app.listen(3000,()=>{
-	console.log("app is running ");
+
+app.listen(PORT,()=>{
+	console.log("app is running at "+PORT);
 })
